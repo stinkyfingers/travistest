@@ -11,3 +11,4 @@ jobs:
       go: 1.16.x
       dist: xenial
       before_install: ./scripts/install_script.sh $TRAVIS_COMMIT
+      install: skip
