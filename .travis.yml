@@ -12,3 +12,5 @@ jobs:
       dist: xenial
       before_install: ./scripts/install_script.sh $TRAVIS_COMMIT
       install: skip
+      script:
+        - ./scripts/add.sh
