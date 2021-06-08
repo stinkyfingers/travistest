@@ -14,7 +14,8 @@ touch "$KUBECONFIG"
 sudo minikube start --profile=minikube --vm-driver=none --kubernetes-version=v1.20.1
 minikube update-context --profile=minikube
 sudo chown -R travis: /home/travis/.minikube/
-sudo chown -R $USER $HOME/.minikube; chmod -R u+wrx $HOME/.minikube
+echo home $HOME
+sudo chown -R $USER /home/travis/.minikube; chmod -R u+wrx /home/travis/.minikube
 eval "$(minikube docker-env --profile=minikube)" && export DOCKER_CLI='docker'
 # TODO - rm and rely on push from docker repo, make type == PR
 # echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
