@@ -1,5 +1,8 @@
 #!/bin/sh
 
+TRAVIS_COMMIT=$1
+
+export KUBECONFIG="$(kind get kubeconfig-path)"
 kubectl cluster-info
 # make install
 # make ketch
@@ -19,3 +22,4 @@ kubectl wait --for=condition=Ready=true pod -n istio-system --all
 kubectl get pods -A
 # deploy
 # make deploy IMG=shipasoftware/ketch:$TRAVIS_COMMIT
+kubectl apply -f https://github.com/shipa-corp/ketch/releases/download/v0.2.1/ketch-controller.yaml

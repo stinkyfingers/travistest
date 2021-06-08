@@ -36,4 +36,4 @@ jobs:
       before_script:
         - ./scripts/setup_kind.sh
       script:
-        - ./scripts/setup_ketch.sh
+        - ./scripts/setup_ketch.sh $TRAVIS_COMMIT
