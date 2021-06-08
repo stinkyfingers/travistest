@@ -3,10 +3,19 @@ stages:
 
 sudo: required
 
+
+
 jobs:
   include:
     - stage: integration
       sudo: required
+      env:
+        global:
+          - CHANGE_MINIKUBE_NONE_USER=true
+          - MINIKUBE_WANTUPDATENOTIFICATION=false
+          - MINIKUBE_WANTREPORTERRORPROMPT=false
+          - MINIKUBE_HOME=$HOME
+          - KUBECONFIG=$HOME/.kube/config
       language: go
       go: 1.16.x
       dist: xenial
