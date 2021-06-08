@@ -1,6 +1,6 @@
 #!/bin/sh
 
-KUBERNETES_IMAGE="kindest/node:v1.21.1"
+KUBERNETES_IMAGE="kindest/node:v1.17.17"
 
 # Download and install kubectl (optional)
 curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
