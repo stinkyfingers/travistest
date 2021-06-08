@@ -10,4 +10,4 @@ jobs:
       language: go
       go: "1.16"
       script:
-        - ./install_script.sh $TRAVIS_COMMIT
+        - ./scripts/install_script.sh $TRAVIS_COMMIT
