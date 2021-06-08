@@ -1,4 +1,13 @@
-language: go
-go: "1.16"
-script:
-  - ./install_script.sh $TRAVIS_COMMIT
+stages:
+  - test
+
+sudo: required
+
+jobs:
+  include:
+    - stage: test
+      sudo: required
+      language: go
+      go: "1.16"
+      script:
+        - ./install_script.sh $TRAVIS_COMMIT
