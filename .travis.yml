@@ -10,4 +10,4 @@ jobs:
       language: go
       go: 1.16.x
       dist: xenial
-      install: ./scripts/install_script.sh $TRAVIS_COMMIT
+      before_install: ./scripts/install_script.sh $TRAVIS_COMMIT
