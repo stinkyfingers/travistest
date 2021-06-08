@@ -10,3 +10,19 @@ curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/0.0.1/ki
 kind create cluster
 # Set KUBECONFIG environment variable
 export KUBECONFIG="$(kind get kubeconfig-path)"
+
+
+# Kubebuiler & Kustomize
+make install-kubebuilder KUBEBUILDER_INSTALL_DIR=/tmp/kubebuilder
+make install-kustomize KUSTOMIZE_INSTALL_DIR=/tmp
+export PATH=$PATH:/tmp
+
+# Helm
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-get install apt-transport-https --yes
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+# BATS
+sudo apt-get update -yq && sudo apt-get install bats -y
