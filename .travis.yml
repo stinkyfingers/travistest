@@ -37,3 +37,4 @@ jobs:
         - ./scripts/setup_kind.sh
       script:
         - ./scripts/setup_ketch.sh $TRAVIS_COMMIT
+        - ./cli_tests/help.sh
