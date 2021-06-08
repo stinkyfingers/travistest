@@ -13,4 +13,4 @@ jobs:
       before_install: ./scripts/install_script.sh $TRAVIS_COMMIT
       install: skip
       script:
-        - ./cli_tests/add.sh
+        - ./cli_tests/help.sh
