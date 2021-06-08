@@ -14,9 +14,12 @@ ketch -v
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml
 
 # istio
-curl -Ls https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh -
-export PATH=$PWD/istio-1.9.0/bin:$PATH
-istioctl install --set profile=demo -y
+# curl -Ls https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh -
+# export PATH=$PWD/istio-1.9.0/bin:$PATH
+# istioctl install --set profile=demo -y
+
+# traefik
+helm install traefik traefik/traefik
 
 # wait for containers
 kubectl wait --for=condition=Ready=true pod -n cert-manager --all

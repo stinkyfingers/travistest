@@ -1,6 +1,6 @@
 stages:
   - kind
-  - integration
+  - minikube
 
 sudo: required
 
@@ -8,7 +8,7 @@ sudo: required
 
 jobs:
   include:
-    - stage: integration
+    - stage: minikube
       sudo: required
       env:
         global:
