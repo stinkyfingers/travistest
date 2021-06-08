@@ -10,9 +10,18 @@ jobs:
       language: go
       go: 1.16.x
       dist: xenial
-      before_install: 
+      before_install:
         - sudo apt-get -qq -y install conntrack
-        - ./scripts/install_script.sh $TRAVIS_COMMIT
+        - ./scripts/setup_minikube.sh $TRAVIS_COMMIT
       install: skip
       script:
         - ./cli_tests/help.sh
+
+    - stage: kind
+      sudo: required
+      language: go
+      go: 1.16.x
+      services:
+        - docker
+      before_script:
+        - ./scripts/setup_kind.sh
