@@ -8,6 +8,6 @@ jobs:
     - stage: test
       sudo: required
       language: go
-      go: "1.16"
-      script:
-        - ./scripts/install_script.sh $TRAVIS_COMMIT
+      go: 1.16.x
+      dist: xenial
+      install: ./scripts/install_script.sh $TRAVIS_COMMIT
