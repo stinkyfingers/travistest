@@ -1,11 +1,11 @@
 stages:
-  - test
+  - integration
 
 sudo: required
 
 jobs:
   include:
-    - stage: test
+    - stage: integration
       sudo: required
       language: go
       go: 1.16.x
