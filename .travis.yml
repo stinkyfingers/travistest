@@ -5,8 +5,6 @@ stages:
 
 sudo: required
 
-
-
 jobs:
   include:
     # - stage: minikube
@@ -28,19 +26,19 @@ jobs:
     #   # script:
     #   #   - ./cli_tests/help.sh
 
-    - stage: kind
-      sudo: required
-      language: go
-      go: 1.16.x
-      services:
-        - docker
-      before_script:
-        # - ./scripts/setup_kind.sh
-        - curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/0.0.1/kind-linux-amd64 && chmod +x kind && sudo mv kind /usr/local/bin/
-        - kind create cluster --image "kindest/node:v1.21.1"
-      script:
-        - ./scripts/setup_ketch.sh $TRAVIS_COMMIT
-        - ./cli_tests/help.sh
+    # - stage: kind
+    #   sudo: required
+    #   language: go
+    #   go: 1.16.x
+    #   services:
+    #     - docker
+    #   before_script:
+    #     # - ./scripts/setup_kind.sh
+    #     - curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/0.0.1/kind-linux-amd64 && chmod +x kind && sudo mv kind /usr/local/bin/
+    #     - kind create cluster --image "kindest/node:v1.21.1"
+    #   script:
+    #     - ./scripts/setup_ketch.sh $TRAVIS_COMMIT
+    #     - ./cli_tests/help.sh
 
     # - stage: integration
     #   sudo: required
@@ -79,3 +77,13 @@ jobs:
     #     # - echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
     #     # - sudo apt-get update
     #     # - sudo apt-get install helm
+
+    - stage: k3d
+      sudo: required
+      language: go
+      go: 1.16.x
+      services:
+        - docker
+      before_script:
+        - curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+        - k3d cluster create mycluster
