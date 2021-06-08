@@ -3,6 +3,19 @@
 kubectl cluster-info
 # make install
 # make ketch
-curl -s https://raw.githubusercontent.com/shipa-corp/ketch/main/install.sh | bash
+sudo curl -s https://raw.githubusercontent.com/shipa-corp/ketch/main/install.sh | sudo bash
 
 ketch -v
+
+# cert-manager
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml
+# istio
+curl -Ls https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh -
+export PATH=$PWD/istio-1.9.0/bin:$PATH
+istioctl install --set profile=demo -y
+# wait for containers
+kubectl wait --for=condition=Ready=true pod -n cert-manager --all
+kubectl wait --for=condition=Ready=true pod -n istio-system --all
+kubectl get pods -A
+# deploy
+# make deploy IMG=shipasoftware/ketch:$TRAVIS_COMMIT
