@@ -19,6 +19,8 @@ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3
 # istioctl install --set profile=demo -y
 
 # traefik
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
 helm install traefik traefik/traefik
 
 # wait for containers

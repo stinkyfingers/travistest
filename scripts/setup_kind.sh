@@ -7,7 +7,7 @@ curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.12
 # Download and install kind using cURL
 curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/0.0.1/kind-linux-amd64 && chmod +x kind && sudo mv kind /usr/local/bin/
 # Create a new Kubernetes cluster using kind
-kind create cluster
+kind create cluster --image "kindest/node:v1.21.1"
 # Set KUBECONFIG environment variable
 # export KUBECONFIG="$(kind get kubeconfig-path)"
 
