@@ -10,7 +10,9 @@ jobs:
       language: go
       go: 1.16.x
       dist: xenial
-      before_install: ./scripts/install_script.sh $TRAVIS_COMMIT
+      before_install: 
+        - sudo apt-get -qq -y install conntrack
+        - ./scripts/install_script.sh $TRAVIS_COMMIT
       install: skip
       script:
         - ./cli_tests/help.sh
