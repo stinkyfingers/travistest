@@ -1,4 +1,5 @@
 stages:
+  - kind
   - integration
 
 sudo: required
@@ -21,7 +22,7 @@ jobs:
       dist: xenial
       before_install:
         - sudo apt-get -qq -y install conntrack
-        - ./scripts/setup_minikube.sh $TRAVIS_COMMIT
+        - ./scripts/setup_minikube.sh $TRAVIS_COMMIT $KUBECONFIG
       install: skip
       script:
         - ./cli_tests/help.sh

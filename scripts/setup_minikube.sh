@@ -1,8 +1,10 @@
 #!/bin/sh
 
 TRAVIS_COMMIT=$1
-DOCKER_USERNAME=$2
-DOCKER_PASSWORD=$3
+KUBECONFIG=$2
+DOCKER_USERNAME=$3
+DOCKER_PASSWORD=$4
+
 
 # Minikube
 curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.20.1/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
