@@ -1,6 +1,6 @@
 stages:
   - kind
-  # - integration
+  - integration
 
 sudo: required
 
@@ -8,24 +8,24 @@ sudo: required
 
 jobs:
   include:
-    # - stage: integration
-    #   sudo: required
-    #   env:
-    #     global:
-    #       - CHANGE_MINIKUBE_NONE_USER=true
-    #       - MINIKUBE_WANTUPDATENOTIFICATION=false
-    #       - MINIKUBE_WANTREPORTERRORPROMPT=false
-    #       - MINIKUBE_HOME=$HOME
-    #       - KUBECONFIG=$HOME/.kube/config
-    #   language: go
-    #   go: 1.16.x
-    #   dist: xenial
-    #   before_install:
-    #     - sudo apt-get -qq -y install conntrack
-    #     - ./scripts/setup_minikube.sh $TRAVIS_COMMIT $KUBECONFIG
-    #   install: skip
-    #   script:
-    #     - ./cli_tests/help.sh
+    - stage: integration
+      sudo: required
+      env:
+        global:
+          - CHANGE_MINIKUBE_NONE_USER=true
+          - MINIKUBE_WANTUPDATENOTIFICATION=false
+          - MINIKUBE_WANTREPORTERRORPROMPT=false
+          - MINIKUBE_HOME=$HOME
+          - KUBECONFIG=$HOME/.kube/config
+      language: go
+      go: 1.16.x
+      dist: xenial
+      before_install:
+        - sudo apt-get -qq -y install conntrack
+        - ./scripts/setup_minikube.sh $TRAVIS_COMMIT $KUBECONFIG
+      install: skip
+      script:
+        - ./cli_tests/help.sh
 
     - stage: kind
       sudo: required
