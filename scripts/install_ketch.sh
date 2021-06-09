@@ -20,7 +20,7 @@ kubectl cluster-info
 # make install
 # make ketch
 # sudo curl -s https://raw.githubusercontent.com/shipa-corp/ketch/main/install.sh | sudo bash # TODO
-make manifests install ketch manager
+make manifests install ketch manager deploy
 export PATH=$PATH:$(pwd)/bin
 ketch -v
 
@@ -48,8 +48,3 @@ helm install traefik traefik/traefik
 kubectl wait --for=condition=Ready=true pod -n cert-manager --all
 # kubectl wait --for=condition=Ready=true pod -n istio-system --all # istio only
 kubectl get pods -A
-
-# deploy
-# make deploy IMG=shipasoftware/ketch:$TRAVIS_COMMIT
-# kubectl apply -f https://github.com/shipa-corp/ketch/releases/download/v0.2.1/ketch-controller.yaml # TODO
-make deploy
