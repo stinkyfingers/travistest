@@ -1,10 +1,6 @@
 #!/usr/bin/env bats
 
-export PATH=$PATH:$(pwd)/ketch/bin
-pwd
-ls
-echo $PATH
-which ketch
+ketch -v
 
 framework="myframework"
 appImage="docker.io/shipasoftware/bulletinboard:1.0"
