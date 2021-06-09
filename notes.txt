@@ -81,3 +81,9 @@ ORIGINAL:
         -  make manager
         # test
         - ./cli_tests/app.sh
+
+
+# noop
+NOOP
+NOOP
+NOOP
