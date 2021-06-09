@@ -4,11 +4,22 @@
 sudo minikube start --profile=minikube --vm-driver=none --kubernetes-version=v1.20.1
 sudo chown -R travis /home/travis/.minikube/
 
+# kubebuilder
+make install-kubebuilder KUBEBUILDER_INSTALL_DIR=/tmp/kubebuilder
+
+# kustomize
+make install-kustomize KUSTOMIZE_INSTALL_DIR=/tmp
+export PATH=$PATH:/tmp
+
 # ketch
 kubectl cluster-info
 # make install
 # make ketch
-sudo curl -s https://raw.githubusercontent.com/shipa-corp/ketch/main/install.sh | sudo bash # TODO
+# sudo curl -s https://raw.githubusercontent.com/shipa-corp/ketch/main/install.sh | sudo bash # TODO
+git clone git@github.com:shipa-corp/ketch.git
+cd ketch
+make manifests install ketch manager
+export PATH=$PATH:$(pwd)/bin
 ketch -v
 
 # helm
@@ -38,4 +49,5 @@ kubectl get pods -A
 
 # deploy
 # make deploy IMG=shipasoftware/ketch:$TRAVIS_COMMIT
-kubectl apply -f https://github.com/shipa-corp/ketch/releases/download/v0.2.1/ketch-controller.yaml # TODO
+# kubectl apply -f https://github.com/shipa-corp/ketch/releases/download/v0.2.1/ketch-controller.yaml # TODO
+make deploy

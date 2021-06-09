@@ -22,17 +22,6 @@ appImage="docker.io/shipasoftware/bulletinboard:1.0"
   [[ $result =~ "myframework" ]] # TODO check w/ regex
 }
 
-# @test "platform add" {
-#   result="$(ketch platform add $platform)"
-#   [[ $result =~ "Added platform \"$platform\"" ]]
-# }
-#
-# @test "platform list" {
-#   result="$(ketch platform list)"
-#   [[ $result =~ "NAME    IMAGE                    DESCRIPTION" ]] # TODO check w/ regex
-#   [[ $result =~ "go      shipasoftware/go:v1.2" ]]
-# }
-
 @test "app deploy" {
   result="$(ketch app deploy bulletinboard --framework $framework -i $appImage)"
   # [[ $result =~ "Success" ]]
@@ -43,16 +32,12 @@ appImage="docker.io/shipasoftware/bulletinboard:1.0"
   [[ $result =~ "bulletinboard" ]] # TODO regex
 }
 
+# TODO curl test
+
 @test "app remove" {
   result="$(ketch app remove bulletinboard)"
   [[ $result =~ "Successfully removed!" ]]
 }
-
-# @test "platform delete" {
-#   platform="go"
-#   result="$(ketch platform delete $platform)"
-#   [[ $result =~ "Successfully removed platform \"go\"" ]]
-# }
 
 @test "framework remove" {
   result="$(echo ketch-$framework | ketch framework remove $framework)"
