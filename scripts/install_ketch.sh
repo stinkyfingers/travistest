@@ -1,11 +1,13 @@
 #!/bin/sh
 
+set -e
+
 # start cluster
 sudo minikube start --profile=minikube --vm-driver=none --kubernetes-version=v1.20.1
 sudo chown -R travis /home/travis/.minikube/
 
 # git clone # TODO unneeded in ketch repo
-git clone git@github.com:shipa-corp/ketch.git
+git clone https://github.com/shipa-corp/ketch.git
 cd ketch
 
 # kubebuilder
