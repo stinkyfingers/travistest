@@ -2,7 +2,7 @@
 
 setup() {
   # KETCH=$HOME/code/ketch/bin/ketch
-  KETCH=$(pwd)/ketch/bin
+  KETCH=$(pwd)/ketch/bin/ketch
   INGRESS=$(kubectl get svc traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   FRAMEWORK="myframework"
   APP_IMAGE="docker.io/shipasoftware/bulletinboard:1.0"
@@ -16,7 +16,7 @@ setup() {
   [[ $result =~ "Flags" ]]
 }
 
-@test "framework create" {
+@test "framework add" {
   result=$($KETCH framework add $FRAMEWORK --ingress-service-endpoint $INGRESS --ingress-type traefik)
   [[ $result =~ "Successfully added!" ]]
 }
