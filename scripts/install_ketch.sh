@@ -2,6 +2,7 @@
 
 # start cluster
 sudo minikube start --profile=minikube --vm-driver=none --kubernetes-version=v1.20.1
+sudo chown -R travis /home/travis/.minikube/
 
 # ketch
 kubectl cluster-info
