@@ -1,48 +1,56 @@
 #!/usr/bin/env bats
 
-export PATH=$PATH:$(pwd)/ketch/bin
-ketch -v
+# export PATH=$PATH:$(pwd)/ketch/bin
+# ketch -v
 
-framework="myframework"
-appImage="docker.io/shipasoftware/bulletinboard:1.0"
-# platform="go"
+setup() {
+  KETCH=$HOME/code/ketch/bin/ketch
+  INGRESS=$(kubectl get svc traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  FRAMEWORK="myframework"
+  APP_IMAGE="docker.io/shipasoftware/bulletinboard:1.0"
+}
+
 
 @test "help" {
-  result="$(ketch help)"
+  result="$($KETCH help)"
   [[ $result =~ "For details see https://theketch.io" ]]
   [[ $result =~ "Available Commands" ]]
   [[ $result =~ "Flags" ]]
 }
 
 @test "framework create" {
-  result="$(ketch framework add $framework --ingress-service-endpoint "$(kubectl get svc traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')" --ingress-type traefik)"
+  result=$($KETCH framework add $FRAMEWORK --ingress-service-endpoint $INGRESS --ingress-type traefik)
   [[ $result =~ "Successfully added!" ]]
 }
 
 @test "framework list" {
-  result="$(ketch framework list)"
-  echo $result
-  [[ $result =~ "myframework" ]] # TODO check w/ regex
+  result=$($KETCH framework list)
+  headerRegex="NAME[ \t]+STATUS[ \t]+NAMESPACE[ \t]+INGRESS TYPE[ \t]+INGRESS CLASS NAME[ \t]+CLUSTER ISSUER[ \t]+APPS"
+  dataRegex="myframework[ \t]+ketch-myframework[ \t]+traefik[ \t]+traefik"
+  [[ $result =~ $headerRegex ]]
+  [[ $result =~ $dataRegex ]]
 }
 
 @test "app deploy" {
-  result="$(ketch app deploy bulletinboard --framework $framework -i $appImage)"
-  # [[ $result =~ "Success" ]]
+  run $KETCH app deploy bulletinboard --framework $FRAMEWORK -i $APP_IMAGE
+  [ $status -eq 0 ]
 }
 
 @test "app list" {
-  result="$(ketch app list)"
-  [[ $result =~ "bulletinboard" ]] # TODO regex
+  result=$($KETCH app list)
+  headerRegex="NAME[ \t]+FRAMEWORK[ \t]+STATE[ \t]+ADDRESSES[ \t]+BUILDER[ \t]+DESCRIPTION"
+  dataRegex="bulletinboard[ \t]+myframework[ \t]+(created|running)[ \t]+http://bulletinboard.$INGRESS.shipa.cloud"
+  echo $result
+  [[ $result =~ $headerRegex ]]
+  [[ $result =~ $dataRegex ]]
 }
 
-# TODO curl test
-
 @test "app remove" {
-  result="$(ketch app remove bulletinboard)"
+  result=$($KETCH app remove bulletinboard)
   [[ $result =~ "Successfully removed!" ]]
 }
 
 @test "framework remove" {
-  result="$(echo ketch-$framework | ketch framework remove $framework)"
+  result=$(echo ketch-$FRAMEWORK | $KETCH framework remove $FRAMEWORK)
   [[ $result =~ "Framework successfully removed!" ]]
 }

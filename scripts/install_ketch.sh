@@ -19,8 +19,6 @@ export PATH=$PATH:/tmp
 
 # ketch
 kubectl cluster-info
-# make install
-# make ketch
 # sudo curl -s https://raw.githubusercontent.com/shipa-corp/ketch/main/install.sh | sudo bash # TODO
 make manifests install ketch manager
 # TODO make deploy
