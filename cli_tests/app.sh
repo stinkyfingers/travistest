@@ -1,9 +1,10 @@
 #!/usr/bin/env bats
 
-which ketch
+
 pwd
 ls
-echo $PATH 
+echo $PATH
+which ketch
 
 framework="myframework"
 appImage="docker.io/shipasoftware/bulletinboard:1.0"
