@@ -1,8 +1,16 @@
 #!/usr/bin/env bats
 
+# To run locally:
+# export KETCH_COMMAND=<location of ketch binary>
+# assure you have a kubernetes cluster running w/ traefik, cert manager, etc. (see ketch getting started docs)
+# ./app.sh
+
 setup() {
-  # KETCH=$HOME/code/ketch/bin/ketch
-  KETCH=$(pwd)/ketch/bin/ketch
+  if [[ -z "${KETCH_COMMAND}" ]]; then
+    KETCH=$(pwd)/ketch/bin/ketch
+  else
+    KETCH="${KETCH_COMMAND}"
+  fi
   INGRESS=$(kubectl get svc traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   FRAMEWORK="myframework"
   APP_IMAGE="docker.io/shipasoftware/bulletinboard:1.0"
@@ -17,8 +25,8 @@ setup() {
 }
 
 @test "framework add" {
-  echo "ADD" $KETCH framework add $FRAMEWORK --ingress-service-endpoint $INGRESS --ingress-type traefik
-  result=$($KETCH framework add $FRAMEWORK --ingress-service-endpoint $INGRESS --ingress-type traefik)
+  echo "ADD" $KETCH framework add --ingress-service-endpoint $INGRESS --ingress-type traefik
+  result=$($KETCH framework add --ingress-service-endpoint $INGRESS --ingress-type traefik)
   [[ $result =~ "Successfully added!" ]]
 }
 
