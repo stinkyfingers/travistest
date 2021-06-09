@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-export PATH=$PATH:$(pwd)/bin
+export PATH=$PATH:$(pwd)/ketch/bin
 pwd
 ls
 echo $PATH
