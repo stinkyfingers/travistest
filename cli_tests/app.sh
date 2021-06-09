@@ -1,10 +1,8 @@
 #!/usr/bin/env bats
 
-# export PATH=$PATH:$(pwd)/ketch/bin
-# ketch -v
-
 setup() {
-  KETCH=$HOME/code/ketch/bin/ketch
+  # KETCH=$HOME/code/ketch/bin/ketch
+  KETCH=$(pwd)/ketch/bin
   INGRESS=$(kubectl get svc traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   FRAMEWORK="myframework"
   APP_IMAGE="docker.io/shipasoftware/bulletinboard:1.0"
