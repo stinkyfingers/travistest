@@ -25,8 +25,8 @@ setup() {
 }
 
 @test "framework add" {
-  echo "ADD" $KETCH framework add myframework --ingress-service-endpoint $INGRESS --ingress-type traefik
-  result=$($KETCH framework add myframework --ingress-service-endpoint $INGRESS --ingress-type traefik)
+  echo "ADD" $KETCH framework add --ingress-service-endpoint $INGRESS --ingress-type traefik
+  result=$($KETCH framework add --ingress-service-endpoint $INGRESS --ingress-type traefik)
   [[ $result =~ "Successfully added!" ]]
 }
 
