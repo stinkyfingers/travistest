@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-
+export PATH=$PATH:$(pwd)/bin
 pwd
 ls
 echo $PATH
