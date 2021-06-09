@@ -14,3 +14,15 @@ install ketch
 - controller "kubectl apply -f https://github.com/shipa-corp/ketch/releases/download/v0.2.1/ketch-controller.yaml" - make manifests
 
 ...to tests
+
+
+
+
+REFS:
+
+k8s on travis
+https://blog.travis-ci.com/2017-10-26-running-kubernetes-on-travis-ci-with-minikube
+https://www.kubermatic.com/blog/2019-03-12-running-kubernetes-in-the-ci-pipeline-/
+
+travis scripts
+https://docs.travis-ci.com/user/deployment/script/
