@@ -23,8 +23,8 @@ jobs:
 
     - stage: minikube
       sudo: required
-      language: go
-      go: 1.16.x
+      # language: go
+      # go: 1.16.x
       services:
         - docker
       provider: script

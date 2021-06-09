@@ -4,8 +4,6 @@ framework="myframework"
 appImage="docker.io/shipasoftware/bulletinboard:1.0"
 # platform="go"
 
-which bats
-
 @test "help" {
   result="$(ketch help)"
   [[ $result =~ "For details see https://theketch.io" ]]
