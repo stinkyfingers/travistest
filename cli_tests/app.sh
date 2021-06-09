@@ -1,5 +1,10 @@
 #!/usr/bin/env bats
 
+which ketch
+pwd
+ls
+echo $PATH 
+
 framework="myframework"
 appImage="docker.io/shipasoftware/bulletinboard:1.0"
 # platform="go"

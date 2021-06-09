@@ -33,7 +33,7 @@ jobs:
         - bash scripts/install_minikube.sh
         - bash scripts/install_bats.sh
         - bash scripts/install_ketch.sh
-        - bats cli_tests/app_0.2.sh
+        - bats cli_tests/app.sh
 
     # - stage: k3d
     #   sudo: required
