@@ -84,10 +84,9 @@ jobs:
       go: 1.16.x
       services:
         - docker
-      before_script:
-        - curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
-        - k3d cluster create mycluster
-        - echo "test"
       provider: script
       script:
-        - bash scripts/setup_k3d.sh
+        - bash scripts/install_kubectl.sh
+        - bash scripts/install_k3d.sh
+        - bash scripts/install_bats.sh
+        - bash scripts/install_ketch.sh

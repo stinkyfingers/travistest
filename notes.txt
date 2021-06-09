@@ -1,0 +1,16 @@
+STEPS:
+
+install k8s (minikube, k3d, kind)
+
+
+install bats
+
+
+install ketch
+- cli (from source: make ketch)
+- cert manager
+- traefik/istio - traefik requires helm
+- cluster issuer?
+- controller "kubectl apply -f https://github.com/shipa-corp/ketch/releases/download/v0.2.1/ketch-controller.yaml" - make manifests
+
+...to tests
