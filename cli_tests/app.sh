@@ -25,13 +25,14 @@ setup() {
 }
 
 @test "framework add" {
-  echo "ADD" $KETCH framework add --ingress-service-endpoint $INGRESS --ingress-type traefik
-  result=$($KETCH framework add --ingress-service-endpoint $INGRESS --ingress-type traefik)
+  echo "ADD" $KETCH framework add myframework --ingress-service-endpoint $INGRESS --ingress-type traefik
+  result=$($KETCH framework add myframework --ingress-service-endpoint $INGRESS --ingress-type traefik)
   [[ $result =~ "Successfully added!" ]]
 }
 
 @test "framework list" {
   result=$($KETCH framework list)
+  echo "RESULT" $result
   headerRegex="NAME[ \t]+STATUS[ \t]+NAMESPACE[ \t]+INGRESS TYPE[ \t]+INGRESS CLASS NAME[ \t]+CLUSTER ISSUER[ \t]+APPS"
   dataRegex="myframework[ \t]+ketch-myframework[ \t]+traefik[ \t]+traefik"
   [[ $result =~ $headerRegex ]]
