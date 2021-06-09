@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# start cluster
+sudo minikube start --profile=minikube --vm-driver=none --kubernetes-version=v1.20.1
+
 # ketch
 kubectl cluster-info
 # make install
