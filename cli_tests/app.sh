@@ -1,15 +1,15 @@
 #!/usr/bin/env bats
 
 # To run locally:
-# export KETCH_COMMAND=<location of ketch binary>
+# export KETCH_EXECUTABLE_PATH=<location of ketch binary>
 # assure you have a kubernetes cluster running w/ traefik, cert manager, etc. (see ketch getting started docs)
 # ./app.sh
 
 setup() {
-  if [[ -z "${KETCH_COMMAND}" ]]; then
+  if [[ -z "${KETCH_EXECUTABLE_PATH}" ]]; then
     KETCH=$(pwd)/ketch/bin/ketch
   else
-    KETCH="${KETCH_COMMAND}"
+    KETCH="${KETCH_EXECUTABLE_PATH}"
   fi
   INGRESS=$(kubectl get svc traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   FRAMEWORK="myframework"
@@ -41,7 +41,7 @@ setup() {
 
 @test "app deploy" {
   run $KETCH app deploy bulletinboard --framework "$FRAMEWORK" -i "$APP_IMAGE"
-  [ $status -eq 0 ]
+  [[ $status -eq 0 ]]
 }
 
 @test "app list" {
@@ -53,12 +53,17 @@ setup() {
   [[ $result =~ $dataRegex ]]
 }
 
-@test "app remove" {
-  result=$($KETCH app remove bulletinboard)
-  [[ $result =~ "Successfully removed!" ]]
+# new
+@test "app info" {
+  result=$($KETCH app info bulletinboard)
 }
 
-@test "framework remove" {
-  result=$(echo "ketch-$FRAMEWORK" | $KETCH framework remove "$FRAMEWORK")
-  [[ $result =~ "Framework successfully removed!" ]]
-}
+# @test "app remove" {
+#   result=$($KETCH app remove bulletinboard)
+#   [[ $result =~ "Successfully removed!" ]]
+# }
+#
+# @test "framework remove" {
+#   result=$(echo "ketch-$FRAMEWORK" | $KETCH framework remove "$FRAMEWORK")
+#   [[ $result =~ "Framework successfully removed!" ]]
+# }
