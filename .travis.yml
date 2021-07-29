@@ -1,4 +1,11 @@
-language: go
-go: "1.16"
-script:
-  - ./install_script.sh $TRAVIS_COMMIT
+jobs:
+  include:
+    - stage: lint
+      before_script: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.41.1
+      script:
+        - golangci-lint run
+    - stage: install
+      language: go
+      go: "1.16"
+      script:
+        - ./install_script.sh $TRAVIS_COMMIT
