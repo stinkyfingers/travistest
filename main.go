@@ -8,7 +8,7 @@ var unused string
 
 func main() {
 	fmt.Println("testing travis")
-	makeErr("an err")
+	makeErr("an err") //nolint:golint,errcheck
 }
 
 func makeErr(s string) error {

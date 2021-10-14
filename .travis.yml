@@ -1,11 +1,23 @@
 jobs:
   include:
-    - stage: install/lint
+    # - stage: install/lint
+    #   language: go
+    #   before_script:
+    #     - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.41.1
+    #   go: "1.16"
+    #   script:
+    #     - ./install_script.sh $TRAVIS_COMMIT
+    #     - golangci-lint run --timeout 3m
+    - stage: test
+      sudo: required
+      name: "Running integration tests"
       language: go
-      before_script:
-        - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.41.1
-        - go mod download
-      go: "1.16"
+      go: 1.17.x
+      services:
+        - docker
+      provider: script
       script:
-        - ./install_script.sh $TRAVIS_COMMIT
-        - golangci-lint run
+        - bash cli_tests/install_kubectl.sh
+        - bash cli_tests/install_minikube.sh
+        # - bash cli_tests/install_bats.sh
+        - bash cli_tests/install_ketch.sh
