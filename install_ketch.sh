@@ -13,18 +13,18 @@ trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 sudo minikube start --profile=minikube --vm-driver=none --kubernetes-version=v1.20.1
 sudo chown -R travis /home/travis/.minikube/
 
-# kubebuilder
-make install-kubebuilder KUBEBUILDER_INSTALL_DIR=/tmp/kubebuilder
-
-# kustomize
-make install-kustomize KUSTOMIZE_INSTALL_DIR=/tmp
-export PATH=$PATH:/tmp
-
-# ketch
-kubectl cluster-info
-make manifests install ketch manager
-export PATH=$PATH:$(pwd)/bin
-ketch -v
+# # kubebuilder
+# make install-kubebuilder KUBEBUILDER_INSTALL_DIR=/tmp/kubebuilder
+#
+# # kustomize
+# make install-kustomize KUSTOMIZE_INSTALL_DIR=/tmp
+# export PATH=$PATH:/tmp
+#
+# # ketch
+# kubectl cluster-info
+# make manifests install ketch manager
+# export PATH=$PATH:$(pwd)/bin
+# ketch -v
 
 # helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && chmod 700 get_helm.sh && ./get_helm.sh
