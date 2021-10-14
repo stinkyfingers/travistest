@@ -17,7 +17,7 @@ jobs:
         - docker
       provider: script
       script:
-        - bash cli_tests/install_kubectl.sh
-        - bash cli_tests/install_minikube.sh
-        # - bash cli_tests/install_bats.sh
-        - bash cli_tests/install_ketch.sh
+        - bash install_kubectl.sh
+        - bash install_minikube.sh
+        # - bash install_bats.sh
+        - bash install_ketch.sh
